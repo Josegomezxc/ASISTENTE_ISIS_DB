@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendaciones Musicales</title>
+    <link rel="stylesheet" href="{% static 'css/playlist.css' %}">
+</head>
+<body>
+    <div class="playlist-container">
+        <h1>Tus Recomendaciones 🎶</h1>
+        <p>Basado en tus gustos, aquí tienes algunas sugerencias:</p>
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Artista</th>
+            </tr>
+            {% for song in recommended_songs %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ song.title }}</td>
+                <td>{{ song.artist }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No hay recomendaciones por ahora. ¡Sigue escuchando más música!</td>
+            </tr>
+            {% endfor %}
+        </table>        
+    </div>
+</body>
+</html>

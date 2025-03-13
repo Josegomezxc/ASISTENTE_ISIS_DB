@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %} 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chill Vibe Playlist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <link rel="stylesheet" href="{% static 'css/playlist.css' %}">
+</head>
+<body>
+    <style>
+        body {
+            background-image: url('{% static "images/cielo_3.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+        
+    </style>
+    
+    <div class="playlist-container">
+        <button class="back-button" onclick="window.location.href='{% url 'home' %}'"><i class="fas fa-arrow-left"></i></button>
+
+        <div class="header">
+            <img src="{% static 'images/cielo_3.jpg' %}" alt="Playlist Cover" class="cover">
+            <div class="info">
+                <h1>Chill Vibe Playlist 😴</h1>
+                <p>$ Contact ig @musicboy_p for requests | Indie pop and lofi chill vibe playlist. No skips | chill vibe, relaxing music, indie music, tik tok music, laying in bed music, homework music, lofi.</p>
+                <p><strong>Musicboy_p</strong> • 1,759 veces guardada • 122 canciones, cerca de 6 h 30 min</p>
+            </div>
+        </div>
+
+        <div class="controls-container">
+            <button id="playBtn" class="play-button"><i class="fas fa-play"></i></button>
+        </div>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Artista</th>
+                <th>Reproducir</th>
+            </tr>
+            {% for song in user_songs %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ song.song_name }}</td>
+                <td>{{ song.artist_name }}</td>
+                <td>
+                    <button onclick="playSong('{{ song.url }}', '{{ song.song_name }}', '{{ song.artist_name }}')">Reproducir</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <div class="iframe-container" id="iframeContainer">
+        <button class="close-button" onclick="closeIframe()"><i class="fas fa-times"></i></button>
+        <div class="song-title" id="songTitle"></div>
+        <iframe id="videoPlayer" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <script>
+        function playSong(url, title, artist) {
+            let videoId = url.split('v=')[1]; 
+            const ampersandPosition = videoId.indexOf('&'); 
+            if (ampersandPosition !== -1) {
+                videoId = videoId.substring(0, ampersandPosition);
+            }
+            const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            const videoPlayer = document.getElementById('videoPlayer');
+            const iframeContainer = document.getElementById('iframeContainer');
+            const songTitle = document.getElementById('songTitle');
+            
+            videoPlayer.src = embedUrl;
+            songTitle.textContent = `${title} - ${artist}`;
+            iframeContainer.style.display = 'flex';
+        }
+        
+        function closeIframe() {
+            const iframeContainer = document.getElementById('iframeContainer');
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = "";
+            iframeContainer.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

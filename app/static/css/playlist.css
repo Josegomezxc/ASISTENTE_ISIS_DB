@@ -1,0 +1,198 @@
+body {
+    background: linear-gradient(to bottom, #6a0dad, #1e1e1e);
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.playlist-container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+.header {
+    display: flex;
+    align-items: center;
+}
+.cover {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.info h1 {
+    font-size: 70px;
+    font-weight: bold;
+    margin: 0;
+}
+.info p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+.controls-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.play-button {
+    width: 60px;
+    height: 60px;
+    background-color: #1db954;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+}
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+    font-size: 16px;
+}
+th {
+    border-bottom: 2px solid white;
+}
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: black;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.player .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.player .progress {
+    flex-grow: 1;
+    margin: 0 15px;
+    background: gray;
+    height: 4px;
+    position: relative;
+}
+.player .progress .bar {
+    width: 30%;
+    height: 100%;
+    background: white;
+}
+.player .volume {
+    width: 100px;
+}
+
+.back-button, .next-button {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    border: none; /* Sin borde */
+    color: white; /* Color de la flecha */
+    font-size: 24px; /* Tamaño de la flecha */
+    cursor: pointer; /* Cursor de mano */
+    position: absolute; /* Posiciona la flecha en la esquina */
+    width: 50px; /* Ancho del botón */
+    height: 50px; /* Alto del botón */
+    border-radius: 50%; /* Hace el botón circular */
+    display: flex; /* Para centrar el contenido */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+.back-button {
+    top: 20px; /* Espacio desde la parte superior */
+    left: 20px; /* Espacio desde la izquierda */
+}
+.next-button {
+    top: 20px; /* Espacio desde la parte superior */
+    right: 20px; /* Espacio desde la derecha */
+}
+.back-button:hover, .next-button:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Oscurece el fondo al pasar el mouse */
+}
+.back-button:focus, .next-button:focus {
+    outline: none; /* Elimina el contorno al enfocar el botón */
+}
+
+.playlist-container {
+    flex: 2;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    margin: 20px;
+}
+.iframe-container {
+    flex: 1;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    margin: 20px;
+}
+#videoPlayer {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    border-radius: 10px;
+}
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+.header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.cover {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #555;
+}
+th {
+    background: rgba(255, 255, 255, 0.2);
+}
+button {
+    background: #1db954;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+.song-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}

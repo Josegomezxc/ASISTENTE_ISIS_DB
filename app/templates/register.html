@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration | Secure Access</title>
+    {% load static %} 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <form method="POST">
+        <h3>Register</h3>
+
+        {% csrf_token %}
+        
+        <!-- Error Messages -->
+        {% if error %}
+            <p style="color: red; text-align: center;">{{ error }}</p>
+        {% endif %}
+
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="Username" id="username" required>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="Email" id="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+
+        <label for="confirm_password">Confirm Password</label>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password" required>
+
+        <button type="submit">Register</button>
+        
+        <p style="text-align: center; margin-top: 15px;">
+            Already have an account?
+            <a href="{% url 'login' %}" class="register-button">Login in here</a>
+        </p>
+    </form>
+</body>
+</html>
