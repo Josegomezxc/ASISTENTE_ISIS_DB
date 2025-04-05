@@ -4,7 +4,7 @@ const micIcon = document.getElementById("micIcon");
 const soundFrequency = document.getElementById("sound-frequency");
 const wave = document.getElementById("wave");
 
-const ELEVEN_LABS_API_KEY = "sk_f3b621951830253c79d40831a569998ea1a109c47f411456";
+const ELEVEN_LABS_API_KEY = "sk_9e4e59be228718c14e779355ec95b867467c28c491003ddd";
 const ELEVEN_LABS_VOICE_ID = "JEzse6GMhKZ6wrVNFZTq";
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -72,7 +72,14 @@ async function speakWithAria(text) {
         audio.play();
     } catch (error) {
         console.error("Error al reproducir la voz de Aria:", error);
+        speakWithDefaultVoice(text);
     }
+}
+
+function speakWithDefaultVoice(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'es-AR'; // Establece el idioma, por ejemplo, español de Argentina
+    window.speechSynthesis.speak(utterance);
 }
 
 // Función para obtener el CSRF token
@@ -319,7 +326,7 @@ function getCookie(name) {
         else if (text.includes("reproduce") || text.includes("reproducir")) {
             const videoQuery = text.replace(/reproduce|reproducir/i, "").trim();
             
-            const apiKey = "AIzaSyChmRBCh8EW-nzL-N3xi9j-6HPnQMlGfOM"; 
+            const apiKey = "AIzaSyDaV1StCzjDs6ga_L8pRUYNgf9Sbq3BpAo"; 
             const youtubeSearchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(videoQuery)}&type=video&key=${apiKey}`;
         
             const frasesDJ = [

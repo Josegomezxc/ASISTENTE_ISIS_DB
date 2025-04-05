@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Perfil de Usuario - Sergio González Ruano</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .profile-container {
+            margin-top: 50px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .btn-edit {
+            margin-top: 20px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            color: #007bff;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: #0056b3;
+        }
+
+        .table {
+            margin: 20px auto; /* Centra la tabla */
+            width: 80%; /* Ancho de la tabla */
+        }
+
+        .table th, .table td {
+            text-align: center; /* Centra el texto en la tabla */
+        }
+
+        .table th {
+            background-color: #f7f7f7; /* Color de fondo para los encabezados */
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-button" onclick="window.location.href='{% url 'home' %}'"><i class="fa fa-arrow-left"></i></button>
+    <div class="container profile-container">
+        <h3 class="text-center">Información del Usuario</h3>
+        <div class="text-center">
+            <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}http://ssl.gstatic.com/accounts/ui/avatar_2x.png{% endif %}" class="avatar img-circle img-thumbnail" alt="avatar">
+            <h2>{{ user.username }}</h2>
+        </div>
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th><strong>Name:</strong></th>
+                    <td>{{ user.first_name }}</td>
+                </tr>
+                <tr>
+                    <th><strong>Last Name:</strong></th>
+                    <td>{{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th><strong>Email:</strong></th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th><strong>Teléfono:</strong></th>
+                    <td>{{ user.profile.phone }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <a href="{% url 'editar_perfil' %}" class="btn btn-primary btn-edit"><i class="glyphicon glyphicon-edit"></i> Editar Perfil</a>
+        </div>
+        <hr>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Puedes agregar más scripts aquí si lo necesitas
+        });
+    </script>
+</body>
+
+</html>

@@ -165,8 +165,8 @@ tr:nth-child(even) {
     gap: 20px;
 }
 .cover {
-    width: 150px;
-    height: 150px;
+    width: 270px;
+    height: 270px;
     border-radius: 10px;
 }
 table {

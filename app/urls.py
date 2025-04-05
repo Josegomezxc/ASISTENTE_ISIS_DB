@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.urls import path
 from django.conf.urls.static import static
-from .views import home, logout_view
+from .views import editar_perfil, home, logout_view, perfil
 from app import views
 from django.contrib.auth import views as auth_views
 from .views import register
@@ -18,6 +18,8 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('save_song/', save_song, name='save_song'),
     path('playlist/', playlist, name='playlist'),
+    path('perfil/', perfil, name='perfil'),
+    path('editar_perfil/', editar_perfil, name='editar_perfil'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

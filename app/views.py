@@ -7,14 +7,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
-from .models import Song
+from .models import Profile, Song
 from django.shortcuts import render
 from .models import Music
 from django.db.models import Count
 from django.shortcuts import render
 from django.db.models import Count
 from .models import Music
-
+from django.http import JsonResponse
+from .models import Music, Song
+from django.shortcuts import render
+from .models import Music
 
 def user_login(request):
     if request.method == "POST":
@@ -61,9 +64,6 @@ def register(request):
     return render(request, 'register.html')
 
 
-from django.http import JsonResponse
-from .models import Music, Song
-
 def save_song(request):
     if request.method == "POST":
         artist_name = request.POST.get('artist_name')
@@ -89,10 +89,6 @@ def save_song(request):
     return JsonResponse({"error": "Solicitud no válida."}, status=400)
 
 
-
-from django.shortcuts import render
-from .models import Music
-
 def playlist(request):
     user_id = request.user.id  # Obtiene el ID del usuario actual
     
@@ -112,6 +108,42 @@ def playlist(request):
         'user_songs': user_songs,  # Pasamos solo las canciones únicas del usuario
     })
 
+def perfil(request):
+    return render(request, 'perfil.html')
+
+@login_required
+def editar_perfil(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        first_name = request.POST.get('nombre')
+        last_name = request.POST.get('lastname')
+        email = request.POST.get('email')
+        phone = request.POST.get('teléfono')
+        profile_picture = request.FILES.get('profile_picture')  # Asegúrate de obtener la imagen subida
+
+        user = request.user
+
+        # Verificar si el nuevo username ya existe en otro usuario
+        if User.objects.exclude(id=user.id).filter(username=username).exists():
+            messages.error(request, 'El nombre de usuario ya está en uso.')
+            return redirect('editar_perfil')
+
+        user.username = username
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.save()
+
+        profile, created = Profile.objects.get_or_create(user=user)
+        profile.phone = phone
+        if profile_picture:  # Solo guarda si se ha subido una nueva imagen
+            profile.profile_picture = profile_picture
+        profile.save()
+
+        messages.success(request, 'Perfil actualizado correctamente.')
+        return redirect('perfil')
+
+    return render(request, 'editar_perfil.html')
 
 
 
